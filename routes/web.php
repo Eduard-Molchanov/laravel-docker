@@ -38,3 +38,4 @@ Route::get("/activation", [UserController::class, "activation"])->name("activati
 Route::post("/activation", [UserController::class, "formActivation"])->name("form.activation");
 Route::get("/new-password", [UserController::class, "newPassword"])->name("new.password");
 Route::post("/new-password", [UserController::class, "updatePassword"])->name("update.password");
+Route::get("/activelink/{token}", [UserController::class, "activeLink"]);

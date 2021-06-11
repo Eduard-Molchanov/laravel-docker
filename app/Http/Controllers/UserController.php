@@ -74,9 +74,13 @@ class UserController extends Controller
         ]);
         if (Auth::check()) {
             if (Auth::user()->email == $request->email) {
-                $body = "Активация учетной записи в Laravel-Docker";
+                $token = $request->_token;
+//                $body = "Активация учетной записи в Laravel-Docker";
+                $body = "<h3><a href=\"sogasie.test/activelink/{$token}\">активировать учетную запись на сайте sogasie.test</a></h3>";
                 Mail::to($request->email)->send(new ActivMail($body));
                 session()->flash("success", "На Email $request->email выслано письмо с сылкой для активации учетной записи");
+                session(["token" => $token]);
+
                 return redirect()->home();
             } else {
                 return "Некорректный Email";
@@ -105,6 +109,16 @@ class UserController extends Controller
         ]);
         session()->flash("success", "Вы успешно обновили пароль!");
 
+        return redirect()->home();
+    }
+
+    public function activeLink ($token)
+    {
+        $sessionToken = session()->get("token");
+        if ($sessionToken === $token) {
+            session()->flash("success", "Вы успешно активировали учетную запись!");
+            return redirect()->home();
+        }
         return redirect()->home();
     }
 }

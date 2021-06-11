@@ -6,6 +6,11 @@
             {{session("success")}}
         </div>
     @endif
+    @if(session("token"))
+        <div class="alert alert-success">
+            {{session("token")}}
+        </div>
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
