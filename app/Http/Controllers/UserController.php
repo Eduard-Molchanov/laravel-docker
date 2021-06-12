@@ -76,7 +76,7 @@ class UserController extends Controller
             if (Auth::user()->email == $request->email) {
                 $token = $request->_token;
 //                $body = "Активация учетной записи в Laravel-Docker";
-                $body = "<h3><a href=\"sogasie.test/activelink/{$token}\">активировать учетную запись на сайте sogasie.test</a></h3>";
+                $body = "<h3><a href=\"http://sogasie.test/activelink/{$token}\">активировать учетную запись на сайте sogasie.test</a></h3>";
                 Mail::to($request->email)->send(new ActivMail($body));
                 session()->flash("success", "На Email $request->email выслано письмо с сылкой для активации учетной записи");
                 session(["token" => $token]);
@@ -117,6 +117,9 @@ class UserController extends Controller
         $sessionToken = session()->get("token");
         if ($sessionToken === $token) {
             session()->flash("success", "Вы успешно активировали учетную запись!");
+            $user = User::where("id", Auth::id())->update([
+                "email_activ" => true,
+            ]);
             return redirect()->home();
         }
         return redirect()->home();
