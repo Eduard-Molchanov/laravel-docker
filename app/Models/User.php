@@ -38,6 +38,10 @@ class  User extends Authenticatable
         return $this->hasMany(InsurancePolicy::class);
     }
 
+    public function roles ()
+    {
+        return $this->belongsTo(Role::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
