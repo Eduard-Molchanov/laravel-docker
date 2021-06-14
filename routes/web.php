@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,8 @@ Route::get('/login', function () {
     return view('login');
 })->name("log-in");
 
-Route::post('/login', [UserController::class, "login"])->name("login");
+//Route::post('/login', [UserController::class, "login"])->name("login");
+Route::post('/login', [RoleController::class, "roles"])->name("login");
 
 Route::get("/logout", [UserController::class, "logout"])->name("logout");
 
@@ -39,3 +41,9 @@ Route::post("/activation", [UserController::class, "formActivation"])->name("for
 Route::get("/new-password", [UserController::class, "newPassword"])->name("new.password");
 Route::post("/new-password", [UserController::class, "updatePassword"])->name("update.password");
 Route::get("/activelink/{token}", [UserController::class, "activeLink"]);
+
+Route::get("/guest", [RoleController::class, "guest"])->name("guest");
+Route::get("/user", [RoleController::class, "user"])->name("user");
+Route::get("/agent", [RoleController::class, "agent"])->name("agent");
+Route::get("/admin", [RoleController::class, "admin"])->name("admin");
+Route::get("/system", [RoleController::class, "system"])->name("system");
