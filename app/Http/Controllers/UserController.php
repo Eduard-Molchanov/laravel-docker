@@ -49,12 +49,11 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => $request->password,
         ])) {
-           // dd(Auth::user()->name);
-//          $this->authorize("view-role-page");
-            return redirect()->home();
+
+            return redirect()->route(Auth::user()->roles->role);
+//            return redirect()->home();
         }
-        return redirect()->home();
-//        return redirect()->back();
+        return redirect()->back();
     }
 
     public function logout ()

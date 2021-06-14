@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,27 +10,46 @@ class RoleController extends Controller
 {
     public function guest ()
     {
-        return view("pages.guest");
+        if (Gate::allows("guest-page-view")) {
+            return view("pages.guest");
+        }
+        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Гость");
     }
 
     public function user ()
     {
-        return view("pages.user");
+        if (Gate::allows("user-page-view")) {
+            return view("pages.user");
+        }
+        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - User");
+
     }
 
     public function agent ()
     {
-        return view("pages.agent");
+        if (Gate::allows("agent-page-view")) {
+            return view("pages.agent");
+        }
+        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Агент");
+
     }
 
     public function admin ()
     {
-        return view("pages.admin");
+        if (Gate::allows("admin-page-view")) {
+            return view("pages.admin");
+        }
+        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Администратор");
+
     }
 
     public function system ()
     {
-        return view("pages.system");
+        if (Gate::allows("system-page-view")) {
+            return view("pages.system");
+        }
+        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Система");
+
     }
 
     /**
@@ -46,7 +66,8 @@ class RoleController extends Controller
             "email" => $request->email,
             "password" => $request->password,
         ])) {
-            $this->authorize("view-role-page");
+            return $this->authorize("view-role-page");
+//            return 42;
         }
         return redirect()->home();
 
