@@ -49,4 +49,4 @@ Route::get("/agent", [RoleController::class, "agent"])->name("agent");
 Route::get("/admin", [RoleController::class, "admin"])->name("admin");
 Route::get("/system", [RoleController::class, "system"])->name("system");
 
-Route::resource("product", ProductController::class);
+Route::resource("products", ProductController::class);
