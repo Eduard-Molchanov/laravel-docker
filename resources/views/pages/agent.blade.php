@@ -16,7 +16,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal" method="post" action="{{route("products.store")}}">
+                <form class="form-horizontal" method="post" action="{{route("products.store")}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group row">
@@ -62,7 +62,18 @@
                             </div>
                         </div>
 
-                        {{--\\ foto--}}
+                        <div class="form-group row">
+                            <label for="photos">Изображение продукта</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="photos" name="photos" >
+                                    <label class="custom-file-label" for="photos">Загрузите изображение</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Загрузить картинку</span>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="cost_for_6_months" class="col-sm-2 col-form-label">Стоимость за 6
@@ -144,9 +155,4 @@
         <!-- /.card -->
     </div><!-- /.row -->
 @endsection
-<script>
-    $(function () {
 
-        //Date and time picker
-        $('#offer_expiration_date').datetimepicker({icons: {time: 'far fa-clock'}});
-</script>
