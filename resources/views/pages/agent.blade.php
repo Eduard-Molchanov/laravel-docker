@@ -66,12 +66,12 @@
                             <label for="photos">Изображение продукта</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="photos" name="photos" >
+                                    <input type="file"  id="photos" name="photos" >
                                     <label class="custom-file-label" for="photos">Загрузите изображение</label>
                                 </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Загрузить картинку</span>
-                                </div>
+{{--                                <div class="input-group-append">--}}
+{{--                                    <span class="input-group-text">Загрузить картинку</span>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
 

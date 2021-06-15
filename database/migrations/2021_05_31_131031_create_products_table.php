@@ -11,25 +11,25 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up ()
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->decimal("cost_per_year");
-            $table->text("description");
-            $table->unsignedBigInteger("agent_id");
+            $table->string("title")->nullable();
+            $table->decimal("cost_per_year")->nullable();
+            $table->text("description")->nullable();
+            $table->unsignedBigInteger("agent_id")->nullable();
             $table->foreign("agent_id")->references("id")->on("agents");
-            $table->text("advantages");
-            $table->string("photos");
-            $table->decimal("cost_for_6_months");
-            $table->decimal("cost_per_month");
-            $table->decimal("amount_of_discount");
-            $table->unsignedBigInteger("product_category_id");
+            $table->text("advantages")->nullable();
+            $table->string("photos")->nullable();
+            $table->decimal("cost_for_6_months")->nullable();
+            $table->decimal("cost_per_month")->nullable();
+            $table->decimal("amount_of_discount")->nullable();
+            $table->unsignedBigInteger("product_category_id")->nullable();
             $table->foreign("product_category_id")->references("id")->on("product_categories");
-            $table->string("status");
-            $table->dateTime("offer_expiration_date");
-            $table->text("options");
+            $table->string("status")->nullable();
+            $table->dateTime("offer_expiration_date")->nullable();
+            $table->text("options")->nullable();
             $table->timestamps();
         });
     }
@@ -39,7 +39,7 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down ()
     {
         Schema::dropIfExists('products');
     }

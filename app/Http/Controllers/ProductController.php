@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -40,25 +41,23 @@ class ProductController extends Controller
      */
     public function store (Request $request)
     {
-        $this->validate($request, [
-            'photos' => 'image|mimes:jpeg,png,jpg,svg|dimensions:min_width=>300,min_height>300',
+        Product::create([
+            "title" => $request->title,
+            "cost_per_year" => $request->cost_per_year,
+            "description" => $request->description,
+            "agent_id" => $request->agent_id,
+            "advantages" => $request->advantages,
+            "photos" => $request->photos,
+            "cost_for_6_months" => $request->cost_for_6_months,
+            "cost_per_month" => $request->cost_per_month,
+            "amount_of_discount" => $request->amount_of_discount,
+            "product_category_id" => $request->product_category_id,
+            "status" => $request->status,
+            "offer_expiration_date" => $request->offer_expiration_date,
+            "options" => $request->options
         ]);
-
-        if( $request->hasFile('photos')){
-            // Имя и расширение файла
-            $filenameWithExt = $request->file('photos')->getClientOriginalName();
-            // Только оригинальное имя файла
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Расширение
-            $extention = $request->file('photos')->getClientOriginalExtension();
-            // Путь для сохранения
-            $fileNameToStore = "photos/".$filename."_".time().".".$extention;
-            // Сохраняем файл
-            $path = $request->file('photos')->storeAs('uploads/', $fileNameToStore);
-        }
-//        $path = $request->file("photos")->storeAs("uploads", "public");
-        dump($path);
-        dd($request);
+        return redirect()->back()->with("success", "Информация успешно добавлена в базу!");
+        dd($request->all());
     }
 
     /**
