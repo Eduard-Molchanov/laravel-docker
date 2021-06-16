@@ -77,5 +77,16 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="/categories" class="nav-link
+        {{ request()->is('products') ? 'active' : '' }}">
+
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Категории продукта
+                    <span class="right badge badge-danger"> !</span>
+                </p>
+            </a>
+        </li>
     </ul>
 </nav>

@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->decimal("cost_per_month")->nullable();
             $table->decimal("amount_of_discount")->nullable();
             $table->unsignedBigInteger("product_category_id")->nullable();
-            $table->foreign("product_category_id")->references("id")->on("product_categories");
+            $table->foreign("product_category_id")->references("id")->on("product_categories")->nullOnDelete();
             $table->string("status")->nullable();
             $table->dateTime("offer_expiration_date")->nullable();
             $table->text("options")->nullable();

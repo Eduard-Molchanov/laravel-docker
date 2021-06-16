@@ -14,7 +14,7 @@ class AddFkAgents extends Migration
     public function up()
     {
         Schema::table('agents', function (Blueprint $table) {
-            $table->foreign("company_id")->references("id")->on("insurance_companies");
+            $table->foreign("company_id")->references("id")->on("insurance_companies")->nullOnDelete();
         });
     }
 

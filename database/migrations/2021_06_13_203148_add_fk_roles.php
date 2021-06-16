@@ -14,7 +14,7 @@ class AddFkRoles extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign("roles_id")->references("id")->on("roles");
+            $table->foreign("roles_id")->references("id")->on("roles")->nullOnDelete();
         });
     }
 

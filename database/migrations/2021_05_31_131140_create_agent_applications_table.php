@@ -15,22 +15,22 @@ class CreateAgentApplicationsTable extends Migration
     {
         Schema::create('agent_applications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("company_id");
-            $table->foreign("company_id")->references("id")->on("insurance_companies");
-            $table->string("title");
-            $table->text("description");
-            $table->string("logo");
-            $table->string("photos");
-            $table->string("working_hours");
-            $table->text("office_addresses");
-            $table->string("inn")->unique();
-            $table->string("ogrn")->unique();
-            $table->string("kpp");
-            $table->string("full_name");
-            $table->string("short_name");
-            $table->text("license");
-            $table->text("insurance_products");
-            $table->string('email');
+            $table->unsignedBigInteger("company_id")->nullable();
+            $table->foreign("company_id")->references("id")->on("insurance_companies")->nullOnDelete();
+            $table->string("title")->nullable();
+            $table->text("description")->nullable();
+            $table->string("logo")->nullable();
+            $table->string("photos")->nullable();
+            $table->string("working_hours")->nullable();
+            $table->text("office_addresses")->nullable();
+            $table->string("inn")->unique()->nullable();
+            $table->string("ogrn")->unique()->nullable();
+            $table->string("kpp")->nullable();
+            $table->string("full_name")->nullable();
+            $table->string("short_name")->nullable();
+            $table->text("license")->nullable();
+            $table->text("insurance_products")->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
