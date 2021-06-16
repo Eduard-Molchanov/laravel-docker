@@ -16,7 +16,8 @@ class CategoryController extends Controller
 
     public function category ($slug)
     {
-        $products = Product::where("product_category_id", $slug)->get();
+        $products = Product::where("product_category_id", $slug)->paginate(10);
+//        $products = Product::where("product_category_id", $slug)->get();
         return view("pages.category", compact("products", "slug"));
     }
 

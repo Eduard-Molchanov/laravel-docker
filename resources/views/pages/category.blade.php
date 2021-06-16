@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0" style="height: 500px;">
+                <div class="card-body table-responsive p-0" style="height: 550px;">
                     <table class="table table-head-fixed text-nowrap table-hover">
                         <thead>
                         <tr class="expandable-body">
@@ -39,19 +39,26 @@
                                 <td>{{$product->title}}</td>
                                 <td>{{$product->cost_per_year}}</td>
                                 <td><a href="/product-detail/{{$product->id}}"> Посмотреть этот продукт</a></td>
-
                             </tr>
 
                         @endforeach
 
                         </tbody>
                     </table>
+
+
                 </div>
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
         </div>
+
     </div>
     <!-- /.row -->
+<div class="row">
+    <div class="col-md-12">
+        {{$products->links()}}
+    </div>
+</div>
 
 @endsection
