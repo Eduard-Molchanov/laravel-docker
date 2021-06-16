@@ -36,6 +36,9 @@ class UserController extends Controller
         return redirect()->home();
     }
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function login (Request $request)
     {
         $request->validate([
@@ -46,7 +49,9 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => $request->password,
         ])) {
-            return redirect()->home();
+
+            return redirect()->route(Auth::user()->roles->role);
+//            return redirect()->home();
         }
         return redirect()->back();
     }
@@ -74,9 +79,13 @@ class UserController extends Controller
         ]);
         if (Auth::check()) {
             if (Auth::user()->email == $request->email) {
-                $body = "Активация учетной записи в Laravel-Docker";
+                $token = $request->_token;
+//                $body = "Активация учетной записи в Laravel-Docker";
+                $body = "<h3><a href=\"http://sogasie.test/activelink/{$token}\">активировать учетную запись на сайте sogasie.test</a></h3>";
                 Mail::to($request->email)->send(new ActivMail($body));
                 session()->flash("success", "На Email $request->email выслано письмо с сылкой для активации учетной записи");
+                session(["token" => $token]);
+
                 return redirect()->home();
             } else {
                 return "Некорректный Email";
@@ -105,6 +114,19 @@ class UserController extends Controller
         ]);
         session()->flash("success", "Вы успешно обновили пароль!");
 
+        return redirect()->home();
+    }
+
+    public function activeLink ($token)
+    {
+        $sessionToken = session()->get("token");
+        if ($sessionToken === $token) {
+            session()->flash("success", "Вы успешно активировали учетную запись!");
+            $user = User::where("id", Auth::id())->update([
+                "email_activ" => true,
+            ]);
+            return redirect()->home();
+        }
         return redirect()->home();
     }
 }

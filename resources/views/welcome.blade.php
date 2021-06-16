@@ -1,11 +1,7 @@
 @extends("template")
 
 @section("content")
-    @if(session("success"))
-        <div class="alert alert-success">
-            {{session("success")}}
-        </div>
-    @endif
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
@@ -18,7 +14,13 @@
                             card's
                             content.
                         </p>
-
+                        @php
+                            use App\Models\User;
+$x=User::all();
+foreach ($x as $i){
+echo "$i->name <span> - {$i->roles->role}</span><br>";
+}
+                        @endphp
                         <a href="#" class="card-link">Card link</a>
                         <a href="#" class="card-link">Another link</a>
                     </div>
@@ -33,6 +35,15 @@
                             card's
                             content.
                         </p>
+                        <p>
+                            @php
+                                use App\Models\Role;
+$x=Role::all();
+foreach ($x as $i){
+    echo "<span>$i->role</span><br>";
+}
+                            @endphp
+                        </>
                         <a href="#" class="card-link">Card link</a>
                         <a href="#" class="card-link">Another link</a>
                     </div>

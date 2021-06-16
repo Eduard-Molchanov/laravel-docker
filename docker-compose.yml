@@ -9,7 +9,7 @@ services:
       ports:
         - 80:80
       volumes:
-        - ./:/var/www/laravel-docker
+        - ./:/var/www/app
       links:
         - fpm
   fpm:
@@ -18,11 +18,11 @@ services:
         dockerfile: docker/Fpm.Dockerfile
       restart: always
       volumes:
-        - ./:/var/www/laravel-docker
+        - ./:/var/www/app
       links:
         - db
   db:
-      image: mysql
+      image: mysql:5.7
       restart: always
       ports:
         - 33061:3306
@@ -30,6 +30,6 @@ services:
         - MYSQL_USER=userdb
         - MYSQL_PASSWORD=qazqaz
         - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=sogasie
+        - MYSQL_DATABASE=laravel-docker
       volumes:
         - ./db:/var/lib/mysql
