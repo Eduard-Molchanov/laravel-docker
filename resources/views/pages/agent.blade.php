@@ -14,6 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Страховой продукт - добавление</h3>
                 </div>
+
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form class="form-horizontal" method="post" action="{{route("products.store")}}" enctype="multipart/form-data">

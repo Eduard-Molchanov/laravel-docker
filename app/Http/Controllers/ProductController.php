@@ -41,13 +41,25 @@ class ProductController extends Controller
      */
     public function store (Request $request)
     {
+
+      $request->validate([
+          "photos"=>"nullable|image|mimes:jpeg,jpg,bmp,png|max:10000|"
+      ]);
+
+
+        if ($request->hasFile("photos")) {
+            $folder = date('Y-m-d');
+            $photo = $request->file("photos")->store("images/{$folder}");
+        }
+
+
         Product::create([
             "title" => $request->title,
             "cost_per_year" => $request->cost_per_year,
             "description" => $request->description,
             "agent_id" => $request->agent_id,
             "advantages" => $request->advantages,
-            "photos" => $request->photos,
+            "photos" => $photo ?? null,
             "cost_for_6_months" => $request->cost_for_6_months,
             "cost_per_month" => $request->cost_per_month,
             "amount_of_discount" => $request->amount_of_discount,
