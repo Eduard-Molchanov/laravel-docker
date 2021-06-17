@@ -15,18 +15,18 @@ class CreateInsuranceCompaniesTable extends Migration
     {
         Schema::create('insurance_companies', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->string("logo");
-            $table->string("photos");
-            $table->string("working_hours");
-            $table->text("office_addresses");
-            $table->string("inn")->unique();
-            $table->string("ogrn")->unique();
-            $table->string("kpp");
-            $table->string("full_name");
-            $table->string("short_name");
-            $table->text("license");
+            $table->string("title")->nullable();
+            $table->text("description")->nullable();
+            $table->string("logo")->nullable();
+            $table->string("photos")->nullable();
+            $table->string("working_hours")->nullable();
+            $table->text("office_addresses")->nullable();
+            $table->string("inn")->unique()->nullable();
+            $table->string("ogrn")->unique()->nullable();
+            $table->string("kpp")->nullable();
+            $table->string("full_name")->nullable();
+            $table->string("short_name")->nullable();
+            $table->text("license")->nullable();
             $table->timestamps();
         });
     }

@@ -15,11 +15,11 @@ class CreateAgentsTable extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users");
-            $table->unsignedBigInteger("company_id");
-            $table->string("position");
-            $table->string("the_photo");
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->foreign("user_id")->references("id")->on("users")->nullOnDelete();
+            $table->unsignedBigInteger("company_id")->nullable();
+            $table->string("position")->nullable();
+            $table->string("the_photo")->nullable();
             $table->timestamps();
         });
     }

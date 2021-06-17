@@ -55,14 +55,38 @@
                 {{--                </li>--}}
             </ul>
         </li>
-        {{--        <li class="nav-item">--}}
-        {{--            <a href="#" class="nav-link">--}}
-        {{--                <i class="nav-icon fas fa-th"></i>--}}
-        {{--                <p>--}}
-        {{--                    Simple Link--}}
-        {{--                    <span class="right badge badge-danger">New</span>--}}
-        {{--                </p>--}}
-        {{--            </a>--}}
-        {{--        </li>--}}
+        <li class="nav-item">
+            <a href="{{route("products.index")}}" class="nav-link
+        {{ request()->is('products') ? 'active' : '' }}">
+
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Страховые продукты
+                    <span class="right badge badge-danger"> New</span>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{route("products.create")}}" class="nav-link
+        {{ request()->is('products') ? 'active' : '' }}">
+
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Добавление продукта
+                    <span class="right badge badge-danger"> !</span>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/categories" class="nav-link
+        {{ request()->is('products') ? 'active' : '' }}">
+
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Категории продукта
+                    <span class="right badge badge-danger"> !</span>
+                </p>
+            </a>
+        </li>
     </ul>
 </nav>

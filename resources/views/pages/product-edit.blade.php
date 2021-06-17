@@ -12,13 +12,13 @@
         <div class="col-sm-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Страховой продукт - добавление</h3>
+                    <h3 class="card-title">Страховой продукт № {{$id}} - редактирование</h3>
                 </div>
-
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal" method="post" action="{{route("products.store")}}" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="{{route("products.update",["product"=>$id])}}">
                     @csrf
+                    @method("PUT")
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="title" class="col-sm-2 col-form-label">Название</label>
@@ -63,18 +63,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="photos">Изображение продукта</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file"  id="photos" name="photos" >
-                                    <label class="custom-file-label" for="photos">Загрузите изображение</label>
-                                </div>
-{{--                                <div class="input-group-append">--}}
-{{--                                    <span class="input-group-text">Загрузить картинку</span>--}}
-{{--                                </div>--}}
-                            </div>
-                        </div>
+                        {{--\\ foto--}}
 
                         <div class="form-group row">
                             <label for="cost_for_6_months" class="col-sm-2 col-form-label">Стоимость за 6
@@ -156,4 +145,10 @@
         <!-- /.card -->
     </div><!-- /.row -->
 @endsection
+<script>
+    $(function () {
+
+        //Date and time picker
+        $('#offer_expiration_date').datetimepicker({icons: {time: 'far fa-clock'}});
+</script>
 

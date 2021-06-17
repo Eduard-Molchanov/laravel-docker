@@ -15,12 +15,12 @@ class CreateProductCategoriesTable extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->unsignedBigInteger("parent_category_id")->nullable();
-            $table->foreign("parent_category_id")->references("id")->on("product_categories");
-            $table->integer("sorting");
-            $table->string("url_slug");
+            $table->string("title")->nullable();
+            $table->text("description")->nullable();
+            $table->unsignedBigInteger("parent_category_id")->nullable()->nullable();
+            $table->foreign("parent_category_id")->references("id")->on("product_categories")->nullOnDelete();
+            $table->integer("sorting")->nullable();
+            $table->string("url_slug")->nullable();
             $table->timestamps();
         });
     }
