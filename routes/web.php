@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +53,9 @@ Route::get("/system", [RoleController::class, "system"])->name("system");
 
 Route::resource("products", ProductController::class);
 
-Route::get("/categories", [CategoryController::class,"index"]);
-Route::get("/category/{slug}", [CategoryController::class,"category"]);
-Route::get("/product-detail/{id}", [CategoryController::class,"productDetail"]);
+Route::get("/categories", [CategoryController::class, "index"]);
+Route::get("/category/{slug}", [CategoryController::class, "category"]);
+Route::get("/product-detail/{id}", [CategoryController::class, "productDetail"]);
+
+Route::get("/search", [SearchController::class, "index"])->name("search");
 
