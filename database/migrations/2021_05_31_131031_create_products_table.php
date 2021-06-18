@@ -15,8 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string("title")->nullable();
-            $table->decimal("cost_per_year")->nullable();
+            $table->string("title")->nullable()->index();
+            $table->decimal("cost_per_year")->nullable()->index();
             $table->text("description")->nullable();
             $table->unsignedBigInteger("agent_id")->nullable();
             $table->foreign("agent_id")->references("id")->on("agents");
@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->decimal("cost_for_6_months")->nullable();
             $table->decimal("cost_per_month")->nullable();
             $table->decimal("amount_of_discount")->nullable();
-            $table->unsignedBigInteger("product_category_id")->nullable();
+            $table->unsignedBigInteger("product_category_id")->nullable()->index();
             $table->foreign("product_category_id")->references("id")->on("product_categories");
             $table->string("status")->nullable();
             $table->dateTime("offer_expiration_date")->nullable();

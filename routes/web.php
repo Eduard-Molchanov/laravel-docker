@@ -57,7 +57,7 @@ Route::get("/categories", [CategoryController::class, "index"]);
 Route::get("/category/{slug}", [CategoryController::class, "category"]);
 Route::get("/product-detail/{id}", [CategoryController::class, "productDetail"]);
 
-//Route::get("/search", [SearchController::class, "index"]);
+Route::get("/search", [SearchController::class, "index"])->name("search");
 //Route::post("/search", [SearchController::class, "search"])->name("search");
-Route::get("/search", [SearchController::class, "search"])->name("search");
+Route::get("/search-data", [SearchController::class, "search"])->name("search-data");
 

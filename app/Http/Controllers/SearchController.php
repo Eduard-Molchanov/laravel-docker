@@ -11,11 +11,15 @@ class SearchController extends Controller
     {
 
         $products = null;
-        return view("pages.search", compact("products"));
+        $s = null;
+        return view("pages.search", compact("products","s"));
     }
 
     public function search (Request $request)
     {
+        $request->validate([
+            "s" => "required",
+        ]);
         if ($request->s) {
             $s = $request->s;
 //        dd($s);
@@ -25,6 +29,6 @@ class SearchController extends Controller
             $products = null;
         }
 
-        return view("pages.search", compact("products"));
+        return view("pages.search", compact("products", "s"));
     }
 }
