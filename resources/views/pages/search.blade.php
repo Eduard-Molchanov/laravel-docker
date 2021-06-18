@@ -9,7 +9,7 @@
 
                     <div class="card-tools">
                         <form method="get" action="{{route("search")}}">
-                            @csrf
+
                             <div class="input-group input-group-sm" style="width: 750px;">
 
                                 <input type="text" name="s" class="form-control float-right"
@@ -66,7 +66,8 @@
     @if($products)
         <div class="row">
             <div class="col-md-12">
-                {{$products->appends(["s"=>request()->s])->links()}}
+                {{$products->links()}}
+{{--                {{$products->appends(["s"=>request()->s])->links()}}--}}
             </div>
         </div>
     @endif

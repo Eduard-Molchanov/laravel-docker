@@ -16,9 +16,15 @@ class SearchController extends Controller
 
     public function search (Request $request)
     {
-        $s = $request->s;
+        if ($request->s) {
+            $s = $request->s;
 //        dd($s);
-        $products =Product::where("title","LIKE", "%$s%")->orderBy("title")->paginate(10);
+            $products = Product::where("title", "LIKE", "%$s%")->orderBy("title")->paginate(10);
+
+        } else {
+            $products = null;
+        }
+
         return view("pages.search", compact("products"));
     }
 }
