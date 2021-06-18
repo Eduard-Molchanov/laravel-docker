@@ -23,7 +23,11 @@ class SearchController extends Controller
         if ($request->s) {
             $s = $request->s;
 //        dd($s);
-            $products = Product::where("title", "LIKE", "%$s%")->orderBy("title")->paginate(10);
+//            $products = Product::titlelike($s)->orWhere->category($s)->orderBy("title")->with("product_categories")->paginate(10);
+//            $products = Product::titlelike($s)->orWhere->category($s)->orderBy("title")->with("product_categories")->paginate(10);
+//            $products = Product::titlelike($s)->orWhere->costperyear($s)->orderBy("title")->paginate(10);
+            $products = Product::titlelike($s)->orWhere->CostPerYear($s)->orWhere->Category($s)->orderBy("title")->paginate(10);
+//            $products = Product::where("title", "LIKE", "%$s%")->orderBy("title")->paginate(10);
 
         } else {
             $products = null;

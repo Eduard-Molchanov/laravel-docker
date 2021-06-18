@@ -38,7 +38,8 @@
                         <thead>
                         <tr class="expandable-body">
                             <th>ID</th>
-                            <th>Категория</th>
+                            <th>Категория ID</th>
+                            <th>Категория название</th>
                             <th>Название</th>
                             <th>Стоимость за год, руб.</th>
                             <th>Детальнее ...</th>
@@ -53,6 +54,7 @@
                                     <tr>
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->product_category_id}}</td>
+                                        <td>{{$product->productCategory->title}}</td>
                                         <td>{{$product->title}}</td>
                                         <td>{{$product->cost_per_year}}</td>
                                         <td><a href="/product-detail/{{$product->id}}"> Посмотреть этот продукт</a></td>

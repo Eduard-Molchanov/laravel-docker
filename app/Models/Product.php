@@ -39,6 +39,20 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class);
     }
-    public function 
+
+    public function scopeTitleLike ($query, $s)
+    {
+        return $query->where("title", "LIKE", "%$s%");
+    }
+
+    public function scopeCostPerYear ($query, $s)
+    {
+        return $query->where("cost_per_year", "LIKE", "%$s%");
+    }
+
+    public function scopeCategory ($query, $s)
+    {
+        return $query->where($this->productCategory()->title, "LIKE", "%$s%");
+    }
 
 }
