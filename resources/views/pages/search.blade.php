@@ -8,16 +8,21 @@
                     <h3 class="card-title">Поиск страховых продуктов</h3>
 
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 750px;">
-                            <input type="text" name="table_search" class="form-control float-right"
-                                   placeholder="Search">
+                        <form method="get" action="{{route("search")}}">
+                            @csrf
+                            <div class="input-group input-group-sm" style="width: 750px;">
 
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                                <input type="text" name="s" class="form-control float-right"
+                                       placeholder="Search ...">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -34,17 +39,17 @@
                         </thead>
                         <tbody>
                         @if($products)
-                        @foreach($products as $product)
+                            @foreach($products as $product)
 
-                            <tr>
-                                <td>{{$product->id}}</td>
-                                <td>{{$product->product_category_id}}</td>
-                                <td>{{$product->title}}</td>
-                                <td>{{$product->cost_per_year}}</td>
-                                <td><a href="/product-detail/{{$product->id}}"> Посмотреть этот продукт</a></td>
-                            </tr>
+                                <tr>
+                                    <td>{{$product->id}}</td>
+                                    <td>{{$product->product_category_id}}</td>
+                                    <td>{{$product->title}}</td>
+                                    <td>{{$product->cost_per_year}}</td>
+                                    <td><a href="/product-detail/{{$product->id}}"> Посмотреть этот продукт</a></td>
+                                </tr>
 
-                        @endforeach
+                            @endforeach
                         @endif
                         </tbody>
                     </table>
@@ -59,10 +64,10 @@
     </div>
     <!-- /.row -->
     @if($products)
-    <div class="row">
-        <div class="col-md-12">
-            {{$products->links()}}
+        <div class="row">
+            <div class="col-md-12">
+                {{$products->appends(["s"=>request()->s])->links()}}
+            </div>
         </div>
-    </div>
     @endif
 @endsection
