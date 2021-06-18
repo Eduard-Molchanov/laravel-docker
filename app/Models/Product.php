@@ -52,7 +52,9 @@ class Product extends Model
 
     public function scopeCategory ($query, $s)
     {
-        return $query->where($this->productCategory()->title, "LIKE", "%$s%");
+        return $query->where( "product_category_id", "LIKE", "%$s%");
+//        return $query->where($this->productCategory->title, "LIKE", "%$s%");
+//        return $query->where($this->productCategory()->title, "LIKE", "%$s%");
     }
 
 }

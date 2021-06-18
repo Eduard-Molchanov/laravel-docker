@@ -82,8 +82,8 @@
     @if($products)
         <div class="row">
             <div class="col-md-12">
-                {{$products->links()}}
-                {{--                {{$products->appends(["s"=>request()->s])->links()}}--}}
+{{--                {{$products->links()}}--}}
+                                {{$products->appends(["s"=>request()->s])->links()}}
             </div>
         </div>
     @endif
