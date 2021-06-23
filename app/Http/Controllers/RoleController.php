@@ -10,46 +10,27 @@ class RoleController extends Controller
 {
     public function guest ()
     {
-        if (Gate::allows("guest-page-view")) {
-            return view("pages.guest");
-        }
-        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Гость");
+        return view("pages.guest");
     }
 
     public function user ()
     {
-        if (Gate::allows("user-page-view")) {
-            return view("pages.user");
-        }
-        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - User");
-
+        return view("pages.user");
     }
 
     public function agent ()
     {
-        if (Gate::allows("agent-page-view")) {
-            return view("pages.agent");
-        }
-        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Агент");
-
+        return view("pages.agent");
     }
 
     public function admin ()
     {
-        if (Gate::allows("admin-page-view")) {
-            return view("pages.admin");
-        }
-        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Администратор");
-
+        return view("pages.admin");
     }
 
     public function system ()
     {
-        if (Gate::allows("system-page-view")) {
-            return view("pages.system");
-        }
-        return redirect()->back()->with("message-danger", "У вас нет доступа к  странице - Система");
-
+        return view("pages.system");
     }
 
     /**

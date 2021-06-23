@@ -62,7 +62,7 @@
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                     Страховые продукты
-                    <span class="right badge badge-danger"> New</span>
+{{--                    <span class="right badge badge-danger"> New</span>--}}
                 </p>
             </a>
         </li>
@@ -73,7 +73,7 @@
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                     Добавление продукта
-                    <span class="right badge badge-danger"> !</span>
+{{--                    <span class="right badge badge-danger"> !</span>--}}
                 </p>
             </a>
         </li>
@@ -84,7 +84,18 @@
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                     Категории продукта
-                    <span class="right badge badge-danger"> !</span>
+{{--                    <span class="right badge badge-danger"> !</span>--}}
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{route('search')}}" class="nav-link
+        {{ request()->is('search') ? 'active' : '' }}">
+
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                   Поиск
+{{--                    <span class="right badge badge-danger"> !</span>--}}
                 </p>
             </a>
         </li>

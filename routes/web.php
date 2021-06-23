@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,17 +43,26 @@ Route::get("/activation", [UserController::class, "activation"])->name("activati
 Route::post("/activation", [UserController::class, "formActivation"])->name("form.activation");
 Route::get("/new-password", [UserController::class, "newPassword"])->name("new.password");
 Route::post("/new-password", [UserController::class, "updatePassword"])->name("update.password");
-Route::get("/activelink/{token}", [UserController::class, "activeLink"]);
+Route::get("/activelink/{token}", [UserController::class, "activeLink"])->name("activelink");
 
-Route::get("/guest", [RoleController::class, "guest"])->name("guest");
-Route::get("/user", [RoleController::class, "user"])->name("user");
-Route::get("/agent", [RoleController::class, "agent"])->name("agent");
-Route::get("/admin", [RoleController::class, "admin"])->name("admin");
-Route::get("/system", [RoleController::class, "system"])->name("system");
+Route::group(['middleware' => "role"], function () {
+
+    Route::get("/guest", [RoleController::class, "guest"])->name("guest");
+    Route::get("/user", [RoleController::class, "user"])->name("user");
+    Route::get("/agent", [RoleController::class, "agent"])->name("agent");
+    Route::get("/admin", [RoleController::class, "admin"])->name("admin");
+    Route::get("/system", [RoleController::class, "system"])->name("system");
+
+});
+
 
 Route::resource("products", ProductController::class);
 
-Route::get("/categories", [CategoryController::class,"index"]);
-Route::get("/category/{slug}", [CategoryController::class,"category"]);
-Route::get("/product-detail/{id}", [CategoryController::class,"productDetail"]);
+Route::get("/categories", [CategoryController::class, "index"]);
+Route::get("/category/{slug}", [CategoryController::class, "category"]);
+Route::get("/product-detail/{id}", [CategoryController::class, "productDetail"]);
+
+Route::get("/search", [SearchController::class, "index"])->name("search");
+//Route::post("/search", [SearchController::class, "search"])->name("search");
+Route::get("/search-data", [SearchController::class, "search"])->name("search-data");
 
