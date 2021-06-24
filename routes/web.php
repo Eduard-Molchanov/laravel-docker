@@ -43,18 +43,13 @@ Route::get("/activation", [UserController::class, "activation"])->name("activati
 Route::post("/activation", [UserController::class, "formActivation"])->name("form.activation");
 Route::get("/new-password", [UserController::class, "newPassword"])->name("new.password");
 Route::post("/new-password", [UserController::class, "updatePassword"])->name("update.password");
-Route::get("/activelink/{token}", [UserController::class, "activeLink"])->name("activelink");
+Route::get("/activelink/{token}/{id}", [UserController::class, "activeLink"])->name("activelink");
 
-Route::group(['middleware' => "role"], function () {
-
-    Route::get("/guest", [RoleController::class, "guest"])->name("guest");
-    Route::get("/user", [RoleController::class, "user"])->name("user");
-    Route::get("/agent", [RoleController::class, "agent"])->name("agent");
-    Route::get("/admin", [RoleController::class, "admin"])->name("admin");
-    Route::get("/system", [RoleController::class, "system"])->name("system");
-
-});
-
+Route::get("/guest", [RoleController::class, "guest"])->name("guest")->middleware(["role:quest", "active.email"]);
+Route::get("/user", [RoleController::class, "user"])->name("user")->middleware(["role:user", "active.email"]);
+Route::get("/agent", [RoleController::class, "agent"])->name("agent")->middleware(["role:agent", "active.email"]);
+Route::get("/admin", [RoleController::class, "admin"])->name("admin")->middleware(["role:admin", "active.email"]);
+Route::get("/system", [RoleController::class, "system"])->name("system")->middleware(["role:system", "active.email"]);
 
 Route::resource("products", ProductController::class);
 
