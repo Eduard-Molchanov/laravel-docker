@@ -9,7 +9,7 @@ services:
       ports:
         - 80:80
       volumes:
-        - ./:/var/www/app
+        - ./:/home/laravel-docker
       links:
         - fpm
   fpm:
@@ -18,7 +18,7 @@ services:
         dockerfile: docker/Fpm.Dockerfile
       restart: always
       volumes:
-        - ./:/var/www/app
+        - ./:/home/laravel-docker
       links:
         - db
   db:
