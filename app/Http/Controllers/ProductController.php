@@ -44,7 +44,7 @@ class ProductController extends Controller
 
       $request->validate([
           'title' => 'required',
-          "photos"=>"nullable|image|mimes:jpeg,jpg,bmp,png|max:10000|"
+          "photos"=>"nullable|image|mimes:jpeg,jpg,bmp,png|dimensions:min_width=300|dimensions:min_height=300"
       ]);
 
 

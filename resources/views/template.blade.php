@@ -248,7 +248,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main content -->
         <div class="content">
-{{--            @include("inc.message")--}}
+            @include("inc.message")
             @yield("content")
 
         </div>
