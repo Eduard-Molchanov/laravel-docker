@@ -11,6 +11,7 @@
         <!-- Horizontal Form -->
         <div class="col-sm-6">
             <div class="card card-info">
+                @include("inc.message")
                 <div class="card-header">
                     <h3 class="card-title">Страховой продукт - добавление</h3>
                 </div>

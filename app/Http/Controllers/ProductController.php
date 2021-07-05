@@ -43,12 +43,13 @@ class ProductController extends Controller
     {
 
       $request->validate([
+          'title' => 'required',
           "photos"=>"nullable|image|mimes:jpeg,jpg,bmp,png|max:10000|"
       ]);
 
 
         if ($request->hasFile("photos")) {
-            $folder = date('Y-m-d');
+            $folder = date('d-m-Y ');
             $photo = $request->file("photos")->store("images/{$folder}");
         }
 
