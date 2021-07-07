@@ -4,21 +4,22 @@
         <div class="col-sm-6">
             <h1 class="m-0">Агент</h1>
         </div><!-- /.col -->
-
+{{--        {{phpinfo()}}--}}
     </div><!-- /.row -->
     <div class="row mb-12">
         <!-- /.card -->
         <!-- Horizontal Form -->
         <div class="col-sm-6">
             <div class="card card-info">
-{{--                @include("inc.message")--}}
+                {{--                @include("inc.message")--}}
                 <div class="card-header">
                     <h3 class="card-title">Страховой продукт - добавление</h3>
                 </div>
-
+{{--               <img src="{{ asset("/img/123.jpg") }}">--}}
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal" method="post" action="{{route("products.store")}}" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="{{route("products.store")}}"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group row">
@@ -68,12 +69,12 @@
                             <label for="photos">Изображение продукта</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file"  id="photos" name="photos" >
+                                    <input type="file" id="photos" name="photos">
                                     <label class="custom-file-label" for="photos">Загрузите изображение</label>
                                 </div>
-{{--                                <div class="input-group-append">--}}
-{{--                                    <span class="input-group-text">Загрузить картинку</span>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="input-group-append">--}}
+                                {{--                                    <span class="input-group-text">Загрузить картинку</span>--}}
+                                {{--                                </div>--}}
                             </div>
                         </div>
 

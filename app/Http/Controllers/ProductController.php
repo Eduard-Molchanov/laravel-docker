@@ -6,7 +6,11 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+
+//use Intervention\Image\Image;
+
 use Intervention\Image\Facades\Image;
+
 
 class ProductController extends Controller
 {
@@ -52,13 +56,39 @@ class ProductController extends Controller
 
 
         if ($request->hasFile("photos")) {
-            $folder = date('d-m-Y ');
+//            $folder = date('d-m-Y') . "-n";
+            $folder = date('d-m-Y');
+//dump($folder);
+//            $photo = asset("storage/app/".$request->file("photos")->store("images/{$folder}"));
+//            $photo = public_path( $request->file("photos")->store("images/{$folder}"));
+//            $photo = public_path( $request->file("photos")->store("{$folder}"));
+//            $photo = $request->file("photos")->store("public/{$folder}");
+//            $photo = "public/storage/app/" . $request->file("photos")->store("images/{$folder}");
+//            $photo = "public/storage/app/" . $request->file("photos")->store("images/{$folder}");
+//            $photo = "storage/app/" . $request->file("photos")->store("images/{$folder}");
+//            $photo =  $request->file("photos")->store("/storage/{$folder}");
+//             echo "<img src=".asset("/img/123.jpg")." width=350><br><br>";
+////             echo "<img src='/public/storage/123.jpg'>";
+//            echo "<img src=".asset("storage/123.jpg")." width=350><br>";
+//             echo "<img src='img/123.jpg'>";
+//             echo "<img src=\"$photo\">";
+//            dd($photo);
+//            $photo = $request->file("photos")->store("img/{$folder}");
+            $photo =  $request->file("photos")->store("/");
+            echo "<img src=" . asset("storage/456.jpg") . " width=350><br>";
+//            echo "<img src=".asset("storage/42/123.jpg")." width=350><br>";
+            echo "<img src=" . asset("storage/public/123.jpg") . " width=350><br>";
+            echo "<img src=" . asset("storage/" . $photo) . " width=350><br><br>";
+            echo "storage/" . $photo;
+            dump($photo);
+            $url = Storage::get($photo);
+//            $img = Image::make($photo);
 
-            $photo = $request->file("photos")->store("images/{$folder}");
+            $img = Image::make($url);
 
-            $img = Image::make($photo);
-            $height = $img->height();
-            $width = $img->width();
+
+            dump($height = $img->height());
+           dump($width = $img->width());
             if ($height >= 1501) {
                 $img->resize(1500, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -69,7 +99,8 @@ class ProductController extends Controller
                     $constraint->aspectRatio();
                 });
             }
-            $img->save($photo);
+           dump($photo);
+            $img->save("z-".$photo);
 
 
         }
