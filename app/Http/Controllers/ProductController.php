@@ -73,34 +73,37 @@ class ProductController extends Controller
 //             echo "<img src='img/123.jpg'>";
 //             echo "<img src=\"$photo\">";
 //            dd($photo);
-//            $photo = $request->file("photos")->store("img/{$folder}");
-            $photo =  $request->file("photos")->store("/");
-            echo "<img src=" . asset("storage/456.jpg") . " width=350><br>";
-//            echo "<img src=".asset("storage/42/123.jpg")." width=350><br>";
-            echo "<img src=" . asset("storage/public/123.jpg") . " width=350><br>";
-            echo "<img src=" . asset("storage/" . $photo) . " width=350><br><br>";
-            echo "storage/" . $photo;
-            dump($photo);
+            $photo = $request->file("photos")->store("images/{$folder}");
+//            $photo =  $request->file("photos")->store("/");
+//            echo "<img src=" . asset("storage/456.jpg") . " width=350><br>";
+////            echo "<img src=".asset("storage/42/123.jpg")." width=350><br>";
+//            echo "<img src=" . asset("storage/public/123.jpg") . " width=350><br>";
+//            echo "<img src=" . asset("storage/" . $photo) . " width=350><br><br>";
+//            echo "storage/" . $photo;
+//            dump($photo);
             $url = Storage::get($photo);
-//            $img = Image::make($photo);
-
+////            $img = Image::make($photo);
+//
             $img = Image::make($url);
 
 
             dump($height = $img->height());
            dump($width = $img->width());
             if ($height >= 1501) {
-                $img->resize(1500, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-            if ($width >= 1501) {
                 $img->resize(null, 1500, function ($constraint) {
                     $constraint->aspectRatio();
                 });
             }
+            if ($width >= 1501) {
+                $img->resize(1500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
            dump($photo);
-            $img->save("z-".$photo);
+//            $imgUrl="img/".$folder."/".time().".jpg";
+            $imgUrl="img/".time().".jpg";
+//            $img->save($photo);
+            $img->save($imgUrl);
 
 
         }
@@ -112,7 +115,8 @@ class ProductController extends Controller
             "description" => $request->description,
             "agent_id" => $request->agent_id,
             "advantages" => $request->advantages,
-            "photos" => $photo ?? null,
+//            "photos" => $photo ?? null,
+            "photos" => $imgUrl ?? null,
             "cost_for_6_months" => $request->cost_for_6_months,
             "cost_per_month" => $request->cost_per_month,
             "amount_of_discount" => $request->amount_of_discount,
