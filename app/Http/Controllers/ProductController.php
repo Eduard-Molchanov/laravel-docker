@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
+//use Intervention\Image\Image;
+
+use Intervention\Image\Facades\Image;
+
+
 class ProductController extends Controller
 {
-    public function __construct (Request $request)
+    public function __construct(Request $request)
     {
         dump($request->route()->getName());
     }
@@ -17,7 +24,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index ()
+    public function index()
     {
         return view("pages.products");
     }
@@ -27,7 +34,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create ()
+    public function create()
     {
 //        return redirect()->route("agent");
         return view("pages.agent");
@@ -39,17 +46,39 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
 
-      $request->validate([
-          "photos"=>"nullable|image|mimes:jpeg,jpg,bmp,png|max:10000|"
-      ]);
+        $request->validate([
+            'title' => 'required',
+            "photos" => "nullable|image|mimes:jpeg,jpg,bmp,png|dimensions:min_width=300|dimensions:min_height=300"
+        ]);
 
 
         if ($request->hasFile("photos")) {
-            $folder = date('Y-m-d');
+
+            $folder = date('d-m-Y');
+
             $photo = $request->file("photos")->store("images/{$folder}");
+            $url = Storage::get($photo);
+            $img = Image::make($url);
+
+            $height = $img->height();
+            $width = $img->width();
+            if ($height >= 1501) {
+                $img->resize(null, 1500, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            if ($width >= 1501) {
+                $img->resize(1500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            $imgUrl = "img/" . time() . ".jpg";
+            $img->save($imgUrl);
+
+
         }
 
 
@@ -59,7 +88,7 @@ class ProductController extends Controller
             "description" => $request->description,
             "agent_id" => $request->agent_id,
             "advantages" => $request->advantages,
-            "photos" => $photo ?? null,
+            "photos" => $imgUrl ?? null,
             "cost_for_6_months" => $request->cost_for_6_months,
             "cost_per_month" => $request->cost_per_month,
             "amount_of_discount" => $request->amount_of_discount,
@@ -78,7 +107,7 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show ($id)
+    public function show($id)
     {
         return view("pages.product", compact("id"));
     }
@@ -89,7 +118,7 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit ($id)
+    public function edit($id)
     {
         return view("pages.product-edit", compact("id"));
     }
@@ -101,7 +130,7 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update (Request $request, $id)
+    public function update(Request $request, $id)
     {
         dump($id);
         dd($request);
@@ -113,7 +142,7 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy ($id)
+    public function destroy($id)
     {
         dump(__METHOD__);
         dd($id);
