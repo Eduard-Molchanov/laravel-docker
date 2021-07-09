@@ -55,17 +55,17 @@
                 {{--                </li>--}}
             </ul>
         </li>
-        <li class="nav-item">
-            <a href="{{route("products.index")}}" class="nav-link
-        {{ request()->is('products') ? 'active' : '' }}">
+{{--        <li class="nav-item">--}}
+{{--            <a href="{{route("products.index")}}" class="nav-link--}}
+{{--        {{ request()->is('products') ? 'active' : '' }}">--}}
 
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                    Страховые продукты
+{{--                <i class="nav-icon fas fa-th"></i>--}}
+{{--                <p>--}}
+{{--                    Страховые продукты--}}
 {{--                    <span class="right badge badge-danger"> New</span>--}}
-                </p>
-            </a>
-        </li>
+{{--                </p>--}}
+{{--            </a>--}}
+{{--        </li>--}}
         <li class="nav-item">
             <a href="{{route("products.create")}}" class="nav-link
         {{ request()->is('products') ? 'active' : '' }}">
